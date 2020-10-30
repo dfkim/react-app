@@ -30,6 +30,7 @@ const CustomerListView = () => {
       <Container maxWidth={false}>
         <Toolbar />
         <Box mt={3}>
+        {console.log("hello")}
           <Results customers={customers} />
         </Box>
       </Container>
