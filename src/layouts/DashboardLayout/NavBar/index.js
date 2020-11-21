@@ -12,23 +12,27 @@ import {
 import {
   BarChart as BarChartIcon,
   Activity as ActivityIcon,
+  Settings as SettingsIcon,
 
 } from 'react-feather';
 import NavItem from './NavItem';
-
 
 const items = [
   {
     href: '/app/dashboard',
     icon: BarChartIcon,
-    title: 'Dashboard'
+    title: 'ダッシュボード'
   },
   {
     href: '/app/stocks',
     icon: ActivityIcon,
-    title: 'Stocks'
+    title: '証券情報'
   },
-  
+  {
+    href: '/app/settings',
+    icon: SettingsIcon,
+    title: '設定'
+  },
 ];
 
 const useStyles = makeStyles(() => ({
@@ -82,6 +86,8 @@ const NavBar = ({ onMobileClose, openMobile }) => {
           ))}
         </List>
       </Box>
+
+     
       <Box flexGrow={1} />
       <Box
         p={2}
@@ -89,7 +95,8 @@ const NavBar = ({ onMobileClose, openMobile }) => {
         bgcolor="background.dark"
         alignItems="center"
       >
-       <a href="https://github.com/dfkim">@dfkim</a>
+
+         <a href="https://github.com/dfkim">@dfkim</a>
        
       </Box>
     </Box>
