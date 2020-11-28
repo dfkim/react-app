@@ -96,8 +96,6 @@ const NavBar = ({ onMobileClose, openMobile }) => {
         alignItems="center"
       >
 
-<a target="_blank"  rel="noopener noreferrer" href="https://www.amazon.co.jp/gp/product/B0895WXXKL/ref=as_li_tl?ie=UTF8&camp=247&creative=1211&creativeASIN=B0895WXXKL&linkCode=as2&tag=startnipponli-22&linkId=1fcf0f632632f4134611ade7ed0ded3c"><img border="0" src="//ws-fe.amazon-adsystem.com/widgets/q?_encoding=UTF8&MarketPlace=JP&ASIN=B0895WXXKL&ServiceVersion=20070822&ID=AsinImage&WS=1&Format=_SL160_&tag=startnipponli-22" alt="" /></a><img src="//ir-jp.amazon-adsystem.com/e/ir?t=startnipponli-22&l=am2&o=9&a=B0895WXXKL" width="1" height="1" border="0" alt=""  />
-
          <a href="https://github.com/dfkim">@dfkim</a>
        
       </Box>
