@@ -1,9 +1,11 @@
 import React, { useState,useEffect } from 'react';
 import {
+  Button,
   Container,
   Grid,
   makeStyles
 } from '@material-ui/core';
+import AccountBalanceWalletIcon from '@material-ui/icons/AccountBalanceWallet';
 import Page from 'src/components/Page';
 import FundTables from './FundTables';
 import Summary from './Summary';
@@ -12,7 +14,6 @@ import InvestmentAmount from './InvestmentAmount';
 import Ratio from './Ratio';
 import SummaryPi from './SummaryPi';
 import MarketPrice from './MarketPrice';
-
 
 const strToInt = (str) =>  str.replace( /,/g ,"").replace( /円/g ,"");
 const round = (value, base) =>  Math.round(value * base) / base;
@@ -30,60 +31,73 @@ const useStyles = makeStyles((theme) => ({
 const Dashboard = () => {
   const classes = useStyles();
   const [fundData, setFundData] = useState(null);
-
- 
+  const [customerCd, setCustomerCd] = useState('1');
+  const handleChangeCustomerCd = (event) => {
+    setCustomerCd( customerCd => {
+      const c1 = '1';
+      const c2 = '2';
+      if(customerCd === c1) {
+        return c2;
+      }
+      return c1;
+    } );
+  };
   useEffect(() => {
-  
-    
-
-    fetch('https://esll.net/funds', {
-      headers: { 'X-API-KEY': '12345678' },
-      mode: 'cors'
+    const postParam = {
+      "limit" : 25,
+      "start" : 0,
+      "customer" : customerCd
+    }
+    //const apiUrl = "http://localhost:3031/searchNisa"
+    const apiUrl = "https://esll.net/searchNisa";
+    fetch(apiUrl, {
+      method: 'post',
+      headers: { 
+        'X-API-KEY': '12345678',
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      mode: 'cors',
+      body: JSON.stringify(postParam)
     })
     .then((response) => response.json())
     .then((responseJson) => {
-     
       const fundDataList = [];
       let selected =  [];
   
       Object.keys(responseJson).forEach(i => {
         // fund name
-        const itemName = responseJson[i].ITEM_NAME.replace("【つみたて】","");
-
+        const item = responseJson[i]._source;
+        const itemName = item.itemName.replace("【つみたて】","");
         if(selected.indexOf(itemName) >= 0 ){
-
-          fundDataList[itemName] = [...fundDataList[itemName],responseJson[i]];
-         
+          fundDataList[itemName] = [...fundDataList[itemName],item];
         } else {
-
-          fundDataList[itemName] = [responseJson[i]];
+          fundDataList[itemName] = [item];
           selected.push(itemName);
-
         }
-       
-
       });
-
+  
       let totalAmountArr = [];
       let itemPriceArr = [];
       let ratioAmountArr =[];
       for (let key in fundDataList) {
     
         let itemList = fundDataList[key];
+        itemList.sort(function(a,b){
+          if(a.orderDate<b.orderDate) return -1;
+          if(a.orderDate > b.orderDate) return 1;
+          return 0;
+        });
         const currentIdx = itemList.length - 1;
         Object.keys(itemList).forEach(i => {
             if(Number(i) === Number(currentIdx)){
-              totalAmountArr.push(strToInt(itemList[i].CURRENT_PRICE));
-              itemPriceArr.push(strToInt(itemList[i].ITEM_PRICE));
-              if("0" === itemList[i].RATIO_DIV){
-                ratioAmountArr.push(- (strToInt(itemList[i].RATIO_PRICE)))
-              } else {
-                ratioAmountArr.push(strToInt(itemList[i].RATIO_PRICE))
-              }
+              totalAmountArr.push(parseFloat(strToInt(itemList[i].currentPrice)));
+              itemPriceArr.push(parseFloat(strToInt(itemList[i].blancePrice)));
+              ratioAmountArr.push(parseFloat(strToInt(itemList[i].ratioPrice)));
             }
         });
       }
-
+  
       
       const fundData = {
         // ファンドデータリスト
@@ -101,7 +115,6 @@ const Dashboard = () => {
         // 
         ratioDiv: ratioAmountArr.reduce(reducer) > 0 ? true : false
       }
-
       setFundData (fundData);
     })
     .catch((error) =>{
@@ -109,7 +122,7 @@ const Dashboard = () => {
         return;
     });
 
-  },[]);
+  },[customerCd]);
   if(!fundData){
     return "loading..."
   }
@@ -124,6 +137,24 @@ const Dashboard = () => {
           container
           spacing={3}
         >
+         <Grid
+            item
+            lg={12}
+            md={12}
+            xl={12}
+            xs={12}
+           
+          >
+            <Button
+              color="primary"
+              endIcon={<AccountBalanceWalletIcon />}
+              size="small"
+              variant="text"
+              onClick={handleChangeCustomerCd}
+            >
+              Wallet Change
+            </Button>
+          </Grid>
           <Grid
             item
             lg={3}

@@ -13,6 +13,9 @@ import {
   colors
 } from '@material-ui/core';
 import InsertChartIcon from '@material-ui/icons/InsertChartOutlined';
+import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
+import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
+import NumberFormat from 'react-number-format';
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -25,34 +28,13 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
-
-
-function number_format(number, decimals, dec_point, thousands_sep) {
-  // * example: number_format(1234.56, 2, ',', ' ');
-  // * return: '1 234,56'
-  number = (number + '').replace(',', '').replace(' ', '');
-  var n = !isFinite(+number) ? 0 : +number, prec = !isFinite(+decimals) ? 0
-          : Math.abs(decimals), sep = (typeof thousands_sep === 'undefined') ? ','
-          : thousands_sep, dec = (typeof dec_point === 'undefined') ? '.'
-          : dec_point, s = '', toFixedFix = function(n, prec) {
-      var k = Math.pow(10, prec);
-      return '' + Math.round(n * k) / k;
-  };
-  // Fix for IE parseFloat(0.55).toFixed(0) = 0;
-  s = (prec ? toFixedFix(n, prec) : '' + Math.round(n)).split('.');
-  if (s[0].length > 3) {
-      s[0] = s[0].replace(/\B(?=(?:\d{3})+(?!\d))/g, sep);
-  }
-  if ((s[1] || '').length < prec) {
-      s[1] = s[1] || '';
-      s[1] += new Array(prec - s[1].length + 1).join('0');
-  }
-  return s.join(dec);
-}
-
-
 const Profit = ({ className, profitAmount, percentageAmount, ...rest }) => {
   const classes = useStyles();
+
+  let arrowIcon = <ArrowDownwardIcon/>;
+  if(percentageAmount > 0){
+    arrowIcon = <ArrowUpwardIcon/>
+  }
 
   return (
     <Card
@@ -77,7 +59,8 @@ const Profit = ({ className, profitAmount, percentageAmount, ...rest }) => {
               color="textPrimary"
               variant="h3"
             >
-              ¥{number_format(profitAmount)}
+              <NumberFormat value={profitAmount} displayType={'text'} thousandSeparator={true} prefix={'¥'} />
+             
             </Typography>
           </Grid>
           <Grid item>
@@ -86,7 +69,18 @@ const Profit = ({ className, profitAmount, percentageAmount, ...rest }) => {
             </Avatar>
           </Grid>
         </Grid>
-        <Box mt={3}>
+        <Box   mt={2}
+          display="flex"
+          alignItems="center">
+        {arrowIcon}
+          <Typography
+            className={classes.differenceValue}
+            variant="body2"
+          >
+            {percentageAmount + "%"}
+          </Typography>
+          
+          </Box><Box mt={2}>
           <LinearProgress
             value={percentageAmount}
             variant="determinate"

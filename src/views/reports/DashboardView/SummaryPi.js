@@ -36,7 +36,7 @@ const SummaryPi = ({ className, dataList, ...rest }) => {
     lables.push (key);
     let itemList = dataList[key];
     let lastItem = itemList[itemList.length - 1]
-    itemArr.push(strToInt(lastItem.CURRENT_PRICE));
+    itemArr.push(strToInt(lastItem.currentPrice));
     
   });
   const totalAmount = itemArr.reduce(reducer);

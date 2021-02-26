@@ -69,11 +69,11 @@ const Summary = ({ className, dataList, ...rest }) => {
 
     Object.keys(itemList).forEach(i => {
       // item
-      itemArr.push(strToInt(itemList[i].CURRENT_PRICE));
+      itemArr.push(strToInt(itemList[i].currentPrice));
      
       // lable
       if(Number(dataList.length) === Number(index)){
-        lables.push (itemList[i].ORDER_DATE);
+        lables.push (itemList[i].orderDate);
       }
       
     });
@@ -104,10 +104,6 @@ const Summary = ({ className, dataList, ...rest }) => {
     scales: {
       xAxes: [
         {
-          barThickness: 12,
-          maxBarThickness: 10,
-          barPercentage: 0.5,
-          categoryPercentage: 0.5,
           ticks: {
             fontColor: theme.palette.text.secondary
           },

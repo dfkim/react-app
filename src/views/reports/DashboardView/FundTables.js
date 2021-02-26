@@ -15,6 +15,7 @@ import {
   makeStyles
 } from '@material-ui/core';
 
+import NumberFormat from 'react-number-format';
 
 const useStyles = makeStyles(() => ({
   root: {},
@@ -26,17 +27,8 @@ const useStyles = makeStyles(() => ({
 const FundTables = ({ className, title, dataList, ...rest }) => {
   const classes = useStyles();
 
-  let datas = [];
-  Object.keys(dataList).forEach(i => {
-    let data = {orderDate : dataList[i].ORDER_DATE,
-      itemPirce: dataList[i].ITEM_PRICE,
-      currentPrice: dataList[i].CURRENT_PRICE,
-      profitPrice: dataList[i].PROFIT_PRICE,
-      ratioDiv: ("0" === dataList[i].RATIO_DIV) ? '-' : '',
-      ratioPrice: dataList[i].RATIO_PRICE,
-    }
-    datas.push(data);
-  });
+  let datas = dataList;
+  
   return (
     <Card
       className={clsx(classes.root, className)}
@@ -76,16 +68,16 @@ const FundTables = ({ className, title, dataList, ...rest }) => {
                     {item.orderDate}
                   </TableCell>
                   <TableCell>
-                    {item.itemPirce}
+                    <NumberFormat value={item.blancePrice} displayType={'text'} thousandSeparator={true} prefix={'¥'} />
                   </TableCell>
                   <TableCell>
-                    {item.currentPrice}
+                    <NumberFormat value={item.currentPrice} displayType={'text'} thousandSeparator={true} prefix={'¥'} />
                   </TableCell>
                   <TableCell>
-                  {item.profitPrice}
+                    <NumberFormat value={item.profitPrice} displayType={'text'} thousandSeparator={true} prefix={'¥'} />
                   </TableCell>
                   <TableCell>
-              {item.ratioDiv}{item.ratioPrice}
+                    <NumberFormat value={item.ratioPrice} displayType={'text'} thousandSeparator={true} prefix={'¥'} />
                   </TableCell>
                 </TableRow>
               ))}
