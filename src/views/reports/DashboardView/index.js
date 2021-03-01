@@ -1,5 +1,6 @@
 import React, { useState,useEffect } from 'react';
 import {
+  Box,
   Button,
   Container,
   Grid,
@@ -21,11 +22,8 @@ const reducer = (accumulator, currentValue) => Number(accumulator) + Number(curr
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    backgroundColor: theme.palette.background.dark,
-    minHeight: '100%',
-    paddingBottom: theme.spacing(3),
-    paddingTop: theme.spacing(3)
-  }
+    display: 'flex',
+  },
 }));
 
 const Dashboard = () => {
@@ -79,7 +77,8 @@ const Dashboard = () => {
   
       let totalAmountArr = [];
       let itemPriceArr = [];
-      let ratioAmountArr =[];
+      let ratioAmountArr = [];
+      let currentDateArr = [];
       for (let key in fundDataList) {
     
         let itemList = fundDataList[key];
@@ -94,6 +93,7 @@ const Dashboard = () => {
               totalAmountArr.push(parseFloat(strToInt(itemList[i].currentPrice)));
               itemPriceArr.push(parseFloat(strToInt(itemList[i].blancePrice)));
               ratioAmountArr.push(parseFloat(strToInt(itemList[i].ratioPrice)));
+              currentDateArr.push(itemList[i].orderDate);
             }
         });
       }
@@ -113,7 +113,9 @@ const Dashboard = () => {
         // 前日比
         ratioAmount: ratioAmountArr.reduce(reducer),
         // 
-        ratioDiv: ratioAmountArr.reduce(reducer) > 0 ? true : false
+        ratioDiv: ratioAmountArr.reduce(reducer) > 0 ? true : false,
+        // 基準日
+        currentDate: currentDateArr
       }
       setFundData (fundData);
     })
@@ -126,7 +128,6 @@ const Dashboard = () => {
   if(!fundData){
     return "loading..."
   }
-  
   return (
     <Page
       className={classes.root}
@@ -137,23 +138,37 @@ const Dashboard = () => {
           container
           spacing={3}
         >
-         <Grid
-            item
-            lg={12}
-            md={12}
-            xl={12}
-            xs={12}
-           
+
+
+
+          <Grid 
+            item 
+            xs={12} 
+            md={8} 
+            lg={9}
           >
-            <Button
+            <Box textAlign="left">
+              <Button
               color="primary"
               endIcon={<AccountBalanceWalletIcon />}
               size="small"
               variant="text"
               onClick={handleChangeCustomerCd}
-            >
-              Wallet Change
-            </Button>
+              >
+                Wallet Change
+              </Button>
+            </Box>
+          </Grid>
+          <Grid 
+            item 
+            xs={12} 
+            md={4} 
+            lg={3} 
+          >
+             <Box textAlign="right">
+              {fundData.currentDate[0]}時点
+             </Box>
+        
           </Grid>
           <Grid
             item
