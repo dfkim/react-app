@@ -25,11 +25,12 @@ const StocksChartView = () => {
 	const [stockList, setStockList] = useState([]);
 	const [stockName, setStockName] = useState("");
 
+	// https://open.jpbeta.com/stockapi/
 	useEffect(() => {	
 		const symbolData = ["2315", "3402", "6178", "7201", "9434"];
 		const symbolCode = symbolData[Math.floor(Math.random() * symbolData.length)];
 		
-		const fetchUrl = 'https://esll.net/stockapi/timeline/'+symbolCode+'?q=';
+		const fetchUrl = 'https://open.jpbeta.com/stockapi/timeline/'+symbolCode+'?q=';
 		fetch(fetchUrl, {
 			mode: 'cors'
 			})
@@ -61,7 +62,7 @@ const StocksChartView = () => {
 		const symbolData = ["2315", "3402", "6178", "7201", "9434"];
 		Object.keys(symbolData).forEach(i => { 
 			let symbol = symbolData[i];
-			fetch('https://esll.net/stockapi/stocks/'+symbol+'?q=', {
+			fetch('https://open.jpbeta.com/stockapi/stocks/'+symbol+'?q=', {
 				method: 'get',
 				headers: { 
 				  'X-API-KEY': '12345678',
@@ -126,7 +127,7 @@ const StocksChartView = () => {
 	  >
 		<Container  maxWidth={false} >
 
-		<h1>Finance</h1>
+		<h1>証券情報</h1>
 		<Grid
           container
           spacing={3}
@@ -155,17 +156,20 @@ const StocksChartView = () => {
 			  <Card
       
     			>
-					<CardHeader
-					title={stockName}></CardHeader>
-					<CardContent>
-    			<StockChart data={data} />
-				<Divider/>
-				</CardContent></Card>
-			</Grid>
+				<CardHeader
+					title={stockName}
+				>	
+				</CardHeader>
+				<CardContent>
+    				<StockChart data={data} />
+					<Divider/>
+				</CardContent>
+			</Card>
+		</Grid>
 		  
 		</Grid>
-		</Container>
-	  </Page>
+	  </Container>
+	</Page>
 	);
   };
   

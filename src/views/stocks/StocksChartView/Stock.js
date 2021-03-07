@@ -57,7 +57,7 @@ const Stock = ({ className, symbolData, onClick, ...rest }) => {
               gutterBottom
               variant="h6"
             > 
-              <Link href="#"  color={random} onClick={event => onClick(event, symbolData)} >
+              <Link href="#" underline="always" color={random} onClick={event => onClick(event, symbolData)} >
               {symbolData.symbolCode}
               </Link>
             </Typography>
