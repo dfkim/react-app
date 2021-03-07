@@ -24,7 +24,7 @@ const items = [
     title: 'ダッシュボード'
   },
   {
-    href: '/app/stocks',
+    href: '/app/charts',
     icon: ActivityIcon,
     title: '証券情報'
   },

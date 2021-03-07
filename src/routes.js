@@ -4,7 +4,7 @@ import DashboardLayout from 'src/layouts/DashboardLayout';
 import MainLayout from 'src/layouts/MainLayout';
 import DashboardView from 'src/views/reports/DashboardView';
 import NotFoundView from 'src/views/errors/NotFoundView';
-import StocksListView from 'src/views/stocks/StocksListView';
+import StocksChartView from 'src/views/stocks/StocksChartView';
 import LoginView from 'src/views/auth/LoginView';
 import RegisterView from 'src/views/auth/RegisterView';
 import SettingsView from 'src/views/settings/SettingsView';
@@ -17,7 +17,7 @@ const routes = [
     
       { path: 'dashboard', element: <DashboardView /> },
       { path: '*', element: <Navigate to="/404" /> },
-      { path: 'stocks', element: <StocksListView /> },
+      { path: 'charts', element: <StocksChartView /> },
       { path: 'settings', element: <SettingsView /> }
     ]
   },
