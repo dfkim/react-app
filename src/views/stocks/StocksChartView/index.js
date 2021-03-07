@@ -27,7 +27,7 @@ const StocksChartView = () => {
 
 	// https://open.jpbeta.com/stockapi/
 	useEffect(() => {	
-		const symbolData = ["2315", "3402", "6178", "7201", "9434"];
+		const symbolData = ["2315", "6178", "7201", "9434"];
 		const symbolCode = symbolData[Math.floor(Math.random() * symbolData.length)];
 		
 		const fetchUrl = 'https://open.jpbeta.com/stockapi/timeline/'+symbolCode+'?q=';
@@ -59,7 +59,7 @@ const StocksChartView = () => {
 	},[]);
 	useEffect(() => {
 		
-		const symbolData = ["2315", "3402", "6178", "7201", "9434"];
+		const symbolData = ["2315",  "6178", "7201", "9434"];
 		Object.keys(symbolData).forEach(i => { 
 			let symbol = symbolData[i];
 			fetch('https://open.jpbeta.com/stockapi/stocks/'+symbol+'?q=', {
