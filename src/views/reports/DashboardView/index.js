@@ -47,7 +47,7 @@ const Dashboard = () => {
       "customer" : customerCd
     }
     //const apiUrl = "http://localhost:3031/searchNisa"
-    const apiUrl = "https://esll.net/searchNisa";
+    const apiUrl = "https://open.jpbeta.com/searchNisa";
     fetch(apiUrl, {
       method: 'post',
       headers: { 
