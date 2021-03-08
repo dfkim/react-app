@@ -136,9 +136,9 @@ const StocksChartView = () => {
 				<Grid
 				item
 				lg={3}
-				sm={3}
+				sm={6}
 				xl={3}
-				xs={3}
+				xs={12}
 				key={index}
 				>
 					<Stock symbolData={stockData} onClick={handleClick} />
