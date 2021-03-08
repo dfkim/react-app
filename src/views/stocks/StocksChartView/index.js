@@ -87,7 +87,7 @@ const StocksChartView = () => {
 		const symbolCode = data.symbolCode;
 		const symbolName = data.symbolName;
 		setStockName(symbolName)
-		console.log(symbolName)
+		//console.log(symbolName)
 		const fetchUrl = 'https://esll.net/stockapi/timeline/'+symbolCode+'?q=';
 		fetch(fetchUrl, {
 			mode: 'cors'
@@ -127,7 +127,7 @@ const StocksChartView = () => {
 	  >
 		<Container  maxWidth={false} >
 
-		<h1>証券情報</h1>
+		<h2>証券情報</h2>
 		<Grid
           container
           spacing={3}

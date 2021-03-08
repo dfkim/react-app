@@ -41,31 +41,27 @@ const Dashboard = () => {
     } );
   };
   useEffect(() => {
-    const postParam = {
-      "limit" : 25,
-      "start" : 0,
-      "customer" : customerCd
-    }
+    
     //const apiUrl = "http://localhost:3031/searchNisa"
-    const apiUrl = "https://open.jpbeta.com/searchNisa";
+    const apiUrl = "https://open.jpbeta.com/stockapi/searchFund/" + customerCd + "?&limit=25&start=0";
     fetch(apiUrl, {
-      method: 'post',
+      method: 'get',
       headers: { 
         'X-API-KEY': '12345678',
         'Accept': 'application/json',
         'Content-Type': 'application/json'
       },
       mode: 'cors',
-      body: JSON.stringify(postParam)
+      //body: JSON.stringify(postParam)
     })
     .then((response) => response.json())
     .then((responseJson) => {
       const fundDataList = [];
       let selected =  [];
-  
-      Object.keys(responseJson).forEach(i => {
+      let fundDataArr = responseJson.fundDataList;
+      Object.keys(fundDataArr).forEach(i => {
         // fund name
-        const item = responseJson[i]._source;
+        const item = fundDataArr[i];
         const itemName = item.itemName.replace("【つみたて】","");
         if(selected.indexOf(itemName) >= 0 ){
           fundDataList[itemName] = [...fundDataList[itemName],item];
