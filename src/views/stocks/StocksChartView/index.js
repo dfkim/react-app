@@ -88,7 +88,7 @@ const StocksChartView = () => {
 		const symbolName = data.symbolName;
 		setStockName(symbolName)
 		//console.log(symbolName)
-		const fetchUrl = 'https://esll.net/stockapi/timeline/'+symbolCode+'?q=';
+		const fetchUrl = 'https://open.jpbeta.com/stockapi/timeline/'+symbolCode+'?q=';
 		fetch(fetchUrl, {
 			mode: 'cors'
 			})
