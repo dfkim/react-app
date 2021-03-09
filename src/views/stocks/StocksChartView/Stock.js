@@ -16,6 +16,7 @@ import {
 import { green, red } from '@material-ui/core/colors';
 import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
 import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
+import RemoveIcon from '@material-ui/icons/Remove';
 import NumberFormat from 'react-number-format';
 
 const useStyles = makeStyles(() => ({
@@ -32,8 +33,12 @@ const useStyles = makeStyles(() => ({
 const Stock = ({ className, symbolData, onClick, ...rest }) => {
   const classes = useStyles();
   let arrowIcon = <ArrowDownwardIcon style={{ color: green[500] }}/>;
+  // console.log(symbolData.changePrice)
   if(symbolData.changePrice > 0){
     arrowIcon = <ArrowUpwardIcon style={{ color: red[500] }}/>
+  } else if (symbolData.changePrice === "---"){
+    arrowIcon = <RemoveIcon style={{ color: green[500] }}/>
+    
   }
   //const colors = ["background-color: #db5902;","background-color: #3a5d5d;","background-color: #ab764d;","background-color: #173965;","background-color: #d91533;","background-color: #5a808c;","background-color: #737373;","background-color: #323232;","background-color: #393939;","background-color: #fff;","background-color: #5a9001;","background-color: #4267B2;","background-color: #0156b9;","background-color: #e20712;"]
   const quotes = ["initial", "inherit", "primary", "secondary", "textPrimary", "textSecondary", "error"];

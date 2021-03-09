@@ -20,6 +20,7 @@ const strToInt = (str) =>  str.replace( /,/g ,"").replace( /円/g ,"");
 const round = (value, base) =>  Math.round(value * base) / base;
 const reducer = (accumulator, currentValue) => Number(accumulator) + Number(currentValue);
 
+
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
@@ -93,8 +94,10 @@ const Dashboard = () => {
             }
         });
       }
-  
-      
+      const ratioAmount  = ratioAmountArr.reduce(reducer);
+      const totalAmount =  totalAmountArr.reduce(reducer);
+      const itemPrice =  itemPriceArr.reduce(reducer);
+   
       const fundData = {
         // ファンドデータリスト
         fundDataList : fundDataList,
@@ -105,11 +108,11 @@ const Dashboard = () => {
         // 運用利益パーセント
         percentageAmount : round((((totalAmountArr.reduce(reducer) - itemPriceArr.reduce(reducer)) / itemPriceArr.reduce(reducer)) * 100),1000),
         // 運用利益
-        profitAmount: Math.abs(totalAmountArr.reduce(reducer) - itemPriceArr.reduce(reducer)),
+        profitAmount: Math.ceil( totalAmount - itemPrice),
         // 前日比
-        ratioAmount: ratioAmountArr.reduce(reducer),
+        ratioAmount: ratioAmount,
         // 
-        ratioDiv: ratioAmountArr.reduce(reducer) > 0 ? true : false,
+        ratioDiv: ratioAmount > 0 ? true : false,
         // 基準日
         currentDate: currentDateArr
       }
