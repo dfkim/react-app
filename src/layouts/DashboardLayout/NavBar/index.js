@@ -13,6 +13,7 @@ import {
   BarChart as BarChartIcon,
   Activity as ActivityIcon,
   Settings as SettingsIcon,
+  Database as DatabseIcon,
 
 } from 'react-feather';
 import NavItem from './NavItem';
@@ -27,6 +28,11 @@ const items = [
     href: '/app/charts',
     icon: ActivityIcon,
     title: '証券情報'
+  },
+  {
+    href: '/app/historys',
+    icon: DatabseIcon,
+    title: '履歴'
   },
   {
     href: '/app/settings',

@@ -130,7 +130,7 @@ const Dashboard = () => {
   return (
     <Page
       className={classes.root}
-      title="Dashboard"
+      title="ダッシュボード"
     >
       <Container maxWidth={false}>
         <Grid
