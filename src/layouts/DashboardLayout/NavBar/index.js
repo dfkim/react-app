@@ -12,10 +12,9 @@ import {
 import {
   BarChart as BarChartIcon,
   Activity as ActivityIcon,
-  Settings as SettingsIcon,
-  Database as DatabseIcon,
-
+  Database as DatabseIcon
 } from 'react-feather';
+import AccountBalanceIcon from '@material-ui/icons/AccountBalance';
 import NavItem from './NavItem';
 
 const items = [
@@ -33,12 +32,17 @@ const items = [
     href: '/app/historys',
     icon: DatabseIcon,
     title: '履歴'
+  },{
+    href: '/app/coins',
+    icon: AccountBalanceIcon,
+    title: '暗号資産'
   },
+  /*
   {
     href: '/app/settings',
     icon: SettingsIcon,
     title: '設定'
-  },
+  },*/
 ];
 
 const useStyles = makeStyles(() => ({

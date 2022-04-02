@@ -9,6 +9,7 @@ import LoginView from 'src/views/auth/LoginView';
 import RegisterView from 'src/views/auth/RegisterView';
 import SettingsView from 'src/views/settings/SettingsView';
 import HistorysView from 'src/views/historys/HistorysView';
+import CoinsView from 'src/views/coins/CoinsView';
 
 const routes = [
   {
@@ -20,7 +21,8 @@ const routes = [
       { path: '*', element: <Navigate to="/404" /> },
       { path: 'charts', element: <StocksChartView /> },
       { path: 'settings', element: <SettingsView /> },
-      { path: 'historys', element: <HistorysView /> }
+      { path: 'historys', element: <HistorysView /> },
+      { path: 'coins', element: <CoinsView /> }
     ]
   },
   {
@@ -31,8 +33,7 @@ const routes = [
       { path: 'register', element: <RegisterView /> },
       { path: '404', element: <NotFoundView /> },
       { path: '/', element: <Navigate to="/app/dashboard" /> },
-      { path: '*', element: <Navigate to="/404" /> },
-      { path: 'historys', element: <HistorysView /> }
+      { path: '*', element: <Navigate to="/404" /> }
     ]
   }
 ];
