@@ -42,7 +42,7 @@ const HistorysView = () => {
                 Object.keys(symbol).forEach(i => {
                  
                     const item = symbol[i];
-                    if(item.symbol==="JPY"){
+                    if(item.symbol === "JPY" || item.amount === 0){
                         return true;
                     }
                     symbolData.push(item);
@@ -74,9 +74,6 @@ const HistorysView = () => {
                 <Grid container spacing={3}>
                     <Grid item xs={11}>
                         <h2>暗号資産</h2>
-                    </Grid>
-
-                    <Grid item xs={1}>
                         <Box textAlign="left">
                             <Button
                                 color="primary"
@@ -89,6 +86,7 @@ const HistorysView = () => {
                             </Button>
                         </Box>
                     </Grid>
+
                 </Grid>
 
 
