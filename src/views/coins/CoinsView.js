@@ -42,7 +42,7 @@ const HistorysView = () => {
                 Object.keys(symbol).forEach(i => {
                  
                     const item = symbol[i];
-                    if(item.symbol === "JPY" || item.amount === 0){
+                    if(item.symbol === "JPY" || item.amount == 0){
                         return true;
                     }
                     symbolData.push(item);
