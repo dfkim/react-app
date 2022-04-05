@@ -26,7 +26,11 @@ const useStyles = makeStyles(() => ({
 }));
 
 
+
 const CoinBucket = ({ className, symbolData, onClick, ...rest }) => {
+  const orgFloor = (value, base) => {
+    return Math.floor(value * base) / base;
+  }
   const classes = useStyles();
   let mia = "https://coin.z.com/corp_imgs/icon/icon-" + symbolData.symbol.toLowerCase() + ".svg";
   return (
@@ -62,7 +66,7 @@ const CoinBucket = ({ className, symbolData, onClick, ...rest }) => {
               {symbolData.amount} 
             </Typography>
             <Typography textAlign="center">
-              {symbolData.conversionRate * symbolData.amount } 
+              {orgFloor((symbolData.conversionRate * symbolData.amount), 100) } 
             </Typography>
           </Grid>
           <Grid item>
