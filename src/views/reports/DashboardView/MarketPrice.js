@@ -13,7 +13,7 @@ import {
 import TrendingUpIcon from '@material-ui/icons/TrendingUp';
 import NumberFormat from 'react-number-format';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   root: {
     height: '100%'
   },
@@ -31,35 +31,24 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-
 const MarketPrice = ({ className, totalAmount, ...rest }) => {
   const classes = useStyles();
 
   return (
-    <Card
-      className={clsx(classes.root, className)}
-      {...rest}
-    >
+    <Card className={clsx(classes.root, className)} {...rest}>
       <CardContent>
-        <Grid
-          container
-          justify="space-between"
-          spacing={3}
-        >
+        <Grid container justify="space-between" spacing={3}>
           <Grid item>
-            <Typography
-              color="textSecondary"
-              gutterBottom
-              variant="h6"
-            >
+            <Typography color="textSecondary" gutterBottom variant="h6">
               保有時価
             </Typography>
-            <Typography
-              color="textPrimary"
-              variant="h3"
-            >
-              <NumberFormat value={totalAmount} displayType={'text'} thousandSeparator={true} prefix={'¥'} />
-             
+            <Typography color="textPrimary" variant="h3">
+              <NumberFormat
+                value={totalAmount}
+                displayType={'text'}
+                thousandSeparator={true}
+                prefix={'¥'}
+              />
             </Typography>
           </Grid>
           <Grid item>
@@ -68,7 +57,6 @@ const MarketPrice = ({ className, totalAmount, ...rest }) => {
             </Avatar>
           </Grid>
         </Grid>
-        
       </CardContent>
     </Card>
   );

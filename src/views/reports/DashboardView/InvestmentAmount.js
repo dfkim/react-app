@@ -14,7 +14,7 @@ import MoneyIcon from '@material-ui/icons/Money';
 
 import NumberFormat from 'react-number-format';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   root: {
     height: '100%'
   },
@@ -32,36 +32,24 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-
-
 const InvestmentAmount = ({ className, investmentAmount, ...rest }) => {
   const classes = useStyles();
 
   return (
-    <Card
-      className={clsx(classes.root, className)}
-      {...rest}
-    >
+    <Card className={clsx(classes.root, className)} {...rest}>
       <CardContent>
-        <Grid
-          container
-          justify="space-between"
-          spacing={3}
-        >
+        <Grid container justify="space-between" spacing={3}>
           <Grid item>
-            <Typography
-              color="textSecondary"
-              gutterBottom
-              variant="h6"
-            >
+            <Typography color="textSecondary" gutterBottom variant="h6">
               投資総額
             </Typography>
-            <Typography
-              color="textPrimary"
-              variant="h3"
-            >
-              <NumberFormat value={investmentAmount} displayType={'text'} thousandSeparator={true} prefix={'¥'} />
-             
+            <Typography color="textPrimary" variant="h3">
+              <NumberFormat
+                value={investmentAmount}
+                displayType={'text'}
+                thousandSeparator={true}
+                prefix={'¥'}
+              />
             </Typography>
           </Grid>
           <Grid item>
@@ -70,7 +58,6 @@ const InvestmentAmount = ({ className, investmentAmount, ...rest }) => {
             </Avatar>
           </Grid>
         </Grid>
-        
       </CardContent>
     </Card>
   );

@@ -10,7 +10,7 @@ import {
   Grid,
   Typography,
   makeStyles,
-  colors,
+  colors
 } from '@material-ui/core';
 
 import { green, red } from '@material-ui/core/colors';
@@ -32,61 +32,48 @@ const useStyles = makeStyles(() => ({
 
 const Stock = ({ className, symbolData, onClick, ...rest }) => {
   const classes = useStyles();
-  let arrowIcon = <ArrowDownwardIcon style={{ color: green[500] }}/>;
+  let arrowIcon = <ArrowDownwardIcon style={{ color: green[500] }} />;
   // console.log(symbolData.changePrice)
-  if(symbolData.changePrice > 0){
-    arrowIcon = <ArrowUpwardIcon style={{ color: red[500] }}/>
-  } else if (symbolData.changePrice === "---"){
-    arrowIcon = <RemoveIcon style={{ color: green[500] }}/>
-    
+  if (symbolData.changePrice > 0) {
+    arrowIcon = <ArrowUpwardIcon style={{ color: red[500] }} />;
+  } else if (symbolData.changePrice === '---') {
+    arrowIcon = <RemoveIcon style={{ color: green[500] }} />;
   }
   //const quotes = ["initial", "inherit", "primary", "secondary", "textPrimary", "textSecondary", "error"];
   //const random = quotes[Math.floor(Math.random() * quotes.length)];
   return (
-    <Card
-      className={clsx(classes.root, className)}
-      {...rest}
-    >
+    <Card className={clsx(classes.root, className)} {...rest}>
       <CardHeader
-       title={symbolData.symbolCode}
-       subheader={symbolData.time}
-       onClick={event => onClick(event, symbolData)}
-      >
-
-      </CardHeader>
+        title={symbolData.symbolCode}
+        subheader={symbolData.time}
+        onClick={event => onClick(event, symbolData)}
+      ></CardHeader>
       <CardContent>
-        <Grid
-          container
-          justify="space-between"
-          spacing={3}
-        >
+        <Grid container justify="space-between" spacing={3}>
           <Grid item>
-         
             <Typography
               color="textPrimary"
-              gutterBottom 
-              variant="h5" 
+              gutterBottom
+              variant="h5"
               component="div"
             >
               {symbolData.symbolName}
             </Typography>
-            
-            <NumberFormat value={symbolData.stoksPrice} displayType={'text'} thousandSeparator={true} prefix={'¥'} />
+
+            <NumberFormat
+              value={symbolData.stoksPrice}
+              displayType={'text'}
+              thousandSeparator={true}
+              prefix={'¥'}
+            />
           </Grid>
-         
         </Grid>
-        <Box  
-          display="flex"
-          alignItems="center">
-        {arrowIcon}
-          <Typography
-            className={classes.differenceValue}
-            variant="body2"
-          >
+        <Box display="flex" alignItems="center">
+          {arrowIcon}
+          <Typography className={classes.differenceValue} variant="body2">
             {symbolData.changePersent}
           </Typography>
-          
-          </Box>
+        </Box>
       </CardContent>
     </Card>
   );
@@ -96,7 +83,6 @@ Stock.propTypes = {
   className: PropTypes.string,
   symbolData: PropTypes.object.isRequired,
   onClick: PropTypes.func.isRequired
-
 };
 
 export default Stock;

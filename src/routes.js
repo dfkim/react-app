@@ -16,7 +16,6 @@ const routes = [
     path: 'app',
     element: <DashboardLayout />,
     children: [
-    
       { path: 'dashboard', element: <DashboardView /> },
       { path: '*', element: <Navigate to="/404" /> },
       { path: 'charts', element: <StocksChartView /> },

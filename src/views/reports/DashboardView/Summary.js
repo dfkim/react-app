@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { Bar } from 'react-chartjs-2';
@@ -20,75 +20,72 @@ const useStyles = makeStyles(() => ({
   root: {}
 }));
 
-function strToInt(str){
-  return str.replace( /,/g ,"").replace( /円/g ,"")
+function strToInt(str) {
+  return str.replace(/,/g, '').replace(/円/g, '');
 }
 
 function number_format(number, decimals, dec_point, thousands_sep) {
   // * example: number_format(1234.56, 2, ',', ' ');
   // * return: '1 234,56'
   number = (number + '').replace(',', '').replace(' ', '');
-  var n = !isFinite(+number) ? 0 : +number, prec = !isFinite(+decimals) ? 0
-          : Math.abs(decimals), sep = (typeof thousands_sep === 'undefined') ? ','
-          : thousands_sep, dec = (typeof dec_point === 'undefined') ? '.'
-          : dec_point, s = '', toFixedFix = function(n, prec) {
+  var n = !isFinite(+number) ? 0 : +number,
+    prec = !isFinite(+decimals) ? 0 : Math.abs(decimals),
+    sep = typeof thousands_sep === 'undefined' ? ',' : thousands_sep,
+    dec = typeof dec_point === 'undefined' ? '.' : dec_point,
+    s = '',
+    toFixedFix = function(n, prec) {
       var k = Math.pow(10, prec);
       return '' + Math.round(n * k) / k;
-  };
+    };
   // Fix for IE parseFloat(0.55).toFixed(0) = 0;
   s = (prec ? toFixedFix(n, prec) : '' + Math.round(n)).split('.');
   if (s[0].length > 3) {
-      s[0] = s[0].replace(/\B(?=(?:\d{3})+(?!\d))/g, sep);
+    s[0] = s[0].replace(/\B(?=(?:\d{3})+(?!\d))/g, sep);
   }
   if ((s[1] || '').length < prec) {
-      s[1] = s[1] || '';
-      s[1] += new Array(prec - s[1].length + 1).join('0');
+    s[1] = s[1] || '';
+    s[1] += new Array(prec - s[1].length + 1).join('0');
   }
   return s.join(dec);
 }
-
 
 const Summary = ({ className, dataList, ...rest }) => {
   const classes = useStyles();
   const theme = useTheme();
 
- 
-
   let datasets = [];
   let colorArr = [
-  colors.indigo[500],
-  colors.red[600],
-  colors.orange[600],
-  colors.green[600],
-  colors.yellow[600]];
+    colors.indigo[500],
+    colors.red[600],
+    colors.orange[600],
+    colors.green[600],
+    colors.yellow[600]
+  ];
   let lables = [];
-  Object.keys(dataList).forEach((key,index) => {
-   
+  Object.keys(dataList).forEach((key, index) => {
     let itemList = dataList[key];
     let itemArr = [];
 
     Object.keys(itemList).forEach(i => {
       // item
       itemArr.push(strToInt(itemList[i].currentPrice));
-     
+
       // lable
-      if(Number(dataList.length) === Number(index)){
-        lables.push (itemList[i].orderDate);
+      if (Number(dataList.length) === Number(index)) {
+        lables.push(itemList[i].orderDate);
       }
-      
     });
-    
+
     // datasets
     let sets = {
       backgroundColor: colorArr[index],
-      label : key,
-      data : itemArr,fill : false
+      label: key,
+      data: itemArr,
+      fill: false
     };
     datasets.push(sets);
   });
-  
-    
-  
+
   const data = {
     datasets: datasets,
     labels: lables
@@ -114,11 +111,11 @@ const Summary = ({ className, dataList, ...rest }) => {
         }
       ],
       yAxes: [
-        {  
-          display : true,
-          scaleLabel : {
-              display : true,
-              labelString : 'Balance'
+        {
+          display: true,
+          scaleLabel: {
+            display: true,
+            labelString: 'Balance'
           },
           ticks: {
             fontColor: theme.palette.text.secondary,
@@ -126,13 +123,13 @@ const Summary = ({ className, dataList, ...rest }) => {
             min: 0,
             callback: function(value, index, values) {
               if (value >= 1000) {
-                value /= 1000
-                value += '千円'
+                value /= 1000;
+                value += '千円';
               } else {
-                  value /= 1000
-                  value += '千円'
+                value /= 1000;
+                value += '千円';
               }
-              return '￥' + value
+              return '￥' + value;
             }
           },
           gridLines: {
@@ -157,15 +154,14 @@ const Summary = ({ className, dataList, ...rest }) => {
       intersect: false,
       mode: 'index',
       titleFontColor: theme.palette.text.primary,
-      callbacks : {
-        label : function(tooltipItem, chart) {
+      callbacks: {
+        label: function(tooltipItem, chart) {
           var label = data.datasets[tooltipItem.datasetIndex].label || '';
-                    if (label) {
-                        label += ': ';
-                    }
-                    label += ' ￥' + number_format(tooltipItem.yLabel);
-                    return label;
-
+          if (label) {
+            label += ': ';
+          }
+          label += ' ￥' + number_format(tooltipItem.yLabel);
+          return label;
         }
       }
     }
@@ -173,44 +169,28 @@ const Summary = ({ className, dataList, ...rest }) => {
 
   const [showLine, setShowLine] = useState(true);
   const [showLine1, setShowLine1] = useState(false);
-  const handleClick = (event) => {
-    if(showLine){
-      setShowLine(false)
-      setShowLine1(true)
+  const handleClick = event => {
+    if (showLine) {
+      setShowLine(false);
+      setShowLine1(true);
     } else {
-      setShowLine(true)
-      setShowLine1(false)
+      setShowLine(true);
+      setShowLine1(false);
     }
   };
 
   return (
-    <Card
-      className={clsx(classes.root, className)}
-      {...rest}
-    >
-      <CardHeader
-        
-        title="サマリーチャート"
-      />
+    <Card className={clsx(classes.root, className)} {...rest}>
+      <CardHeader title="サマリーチャート" />
       <Divider />
       <CardContent>
-        <Box
-          height={400}
-          position="relative"
-        >
-          
-        {showLine && <Bar data={data} options={options} />}
-        {showLine1 && <Line data={data} options= {options} />}
-
+        <Box height={400} position="relative">
+          {showLine && <Bar data={data} options={options} />}
+          {showLine1 && <Line data={data} options={options} />}
         </Box>
       </CardContent>
       <Divider />
-      <Box
-        display="flex"
-        justifyContent="flex-end"
-        p={2}
-      >
-        
+      <Box display="flex" justifyContent="flex-end" p={2}>
         <Button
           color="primary"
           endIcon={<ArrowRightIcon />}
@@ -218,9 +198,8 @@ const Summary = ({ className, dataList, ...rest }) => {
           variant="text"
           onClick={handleClick}
         >
-        切り替え
+          切り替え
         </Button>
-      
       </Box>
     </Card>
   );

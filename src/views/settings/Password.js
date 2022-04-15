@@ -12,9 +12,9 @@ import {
   makeStyles
 } from '@material-ui/core';
 
-const useStyles = makeStyles(({
+const useStyles = makeStyles({
   root: {}
-}));
+});
 
 const Password = ({ className, ...rest }) => {
   const classes = useStyles();
@@ -23,7 +23,7 @@ const Password = ({ className, ...rest }) => {
     confirm: ''
   });
 
-  const handleChange = (event) => {
+  const handleChange = event => {
     setValues({
       ...values,
       [event.target.name]: event.target.value
@@ -31,14 +31,9 @@ const Password = ({ className, ...rest }) => {
   };
 
   return (
-    <form
-      className={clsx(classes.root, className)}
-      {...rest}
-    >
+    <form className={clsx(classes.root, className)} {...rest}>
       <Card>
-        <CardHeader
-          title="パスワード変更"
-        />
+        <CardHeader title="パスワード変更" />
         <Divider />
         <CardContent>
           <TextField
@@ -63,15 +58,8 @@ const Password = ({ className, ...rest }) => {
           />
         </CardContent>
         <Divider />
-        <Box
-          display="flex"
-          justifyContent="flex-end"
-          p={2}
-        >
-          <Button
-            color="primary"
-            variant="contained"
-          >
+        <Box display="flex" justifyContent="flex-end" p={2}>
+          <Button color="primary" variant="contained">
             更新
           </Button>
         </Box>

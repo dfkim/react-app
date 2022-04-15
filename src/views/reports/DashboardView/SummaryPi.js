@@ -21,10 +21,10 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
-
-const strToInt = (str) =>  str.replace( /,/g ,"").replace( /円/g ,"");
-const round = (value, base) =>  Math.round(value * base) / base;
-const reducer = (accumulator, currentValue) => Number(accumulator) + Number(currentValue);
+const strToInt = str => str.replace(/,/g, '').replace(/円/g, '');
+const round = (value, base) => Math.round(value * base) / base;
+const reducer = (accumulator, currentValue) =>
+  Number(accumulator) + Number(currentValue);
 
 const SummaryPi = ({ className, dataList, ...rest }) => {
   const classes = useStyles();
@@ -32,22 +32,21 @@ const SummaryPi = ({ className, dataList, ...rest }) => {
 
   let lables = [];
   let itemArr = [];
-  Object.keys(dataList).forEach((key,index) => {
-    lables.push (key);
+  Object.keys(dataList).forEach((key, index) => {
+    lables.push(key);
     let itemList = dataList[key];
-    let lastItem = itemList[itemList.length - 1]
+    let lastItem = itemList[itemList.length - 1];
     itemArr.push(strToInt(lastItem.currentPrice));
-    
   });
   const totalAmount = itemArr.reduce(reducer);
   let datas = [];
   //round((((totalAmountArr.reduce(reducer) - itemPriceArr.reduce(reducer)) / itemPriceArr.reduce(reducer)) * 100),1000)
-  for(let i = 0; i < itemArr.length; i++){
+  for (let i = 0; i < itemArr.length; i++) {
     let itemAmount = itemArr[i];
-  
-    datas.push(round((itemAmount/totalAmount * 100), 100));
+
+    datas.push(round((itemAmount / totalAmount) * 100, 100));
   }
-  
+
   const data = {
     datasets: [
       {
@@ -93,65 +92,42 @@ const SummaryPi = ({ className, dataList, ...rest }) => {
     colors.red[600],
     colors.orange[600],
     colors.green[600],
-    colors.yellow[600]];
-    let iconArr = [DataUsageIcon,DataUsageIcon,DataUsageIcon,DataUsageIcon,DataUsageIcon];
+    colors.yellow[600]
+  ];
+  let iconArr = [
+    DataUsageIcon,
+    DataUsageIcon,
+    DataUsageIcon,
+    DataUsageIcon,
+    DataUsageIcon
+  ];
 
   const devices = [];
-  for(let i = 0; i < datas.length; i++){
+  for (let i = 0; i < datas.length; i++) {
     let item = {
-      title : lables[i],
+      title: lables[i],
       value: datas[i],
       color: colorArr[i],
-      icon : iconArr[i]
-    }
+      icon: iconArr[i]
+    };
     devices.push(item);
   }
-  
+
   return (
-    <Card
-      className={clsx(classes.root, className)}
-      {...rest}
-    >
+    <Card className={clsx(classes.root, className)} {...rest}>
       <CardHeader title="投資ファンド割合" />
       <Divider />
       <CardContent>
-        <Box
-          height={300}
-          position="relative"
-        >
-          <Doughnut
-            data={data}
-            options={options}
-          />
+        <Box height={300} position="relative">
+          <Doughnut data={data} options={options} />
         </Box>
-        <Box
-          display="flex"
-          justifyContent="center"
-          mt={2}
-        >
-          {devices.map(({
-            color,
-            icon: Icon,
-            title,
-            value
-          }) => (
-            <Box
-              key={title}
-              p={1}
-              textAlign="center"
-            >
+        <Box display="flex" justifyContent="center" mt={2}>
+          {devices.map(({ color, icon: Icon, title, value }) => (
+            <Box key={title} p={1} textAlign="center">
               <Icon color="action" />
-              <Typography
-                color="textPrimary"
-                variant="body1"
-              >
-              </Typography>
-              <Typography
-                style={{ color }}
-                variant="h6"
-              >
-                {value}
-                %
+              <Typography color="textPrimary" variant="body1"></Typography>
+              <Typography style={{ color }} variant="h6">
+                {value}%
               </Typography>
             </Box>
           ))}
@@ -163,7 +139,7 @@ const SummaryPi = ({ className, dataList, ...rest }) => {
 
 SummaryPi.propTypes = {
   className: PropTypes.string,
-  dataList: PropTypes.array,
+  dataList: PropTypes.array
 };
 
 export default SummaryPi;

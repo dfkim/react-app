@@ -31,36 +31,26 @@ const useStyles = makeStyles(() => ({
 const Profit = ({ className, profitAmount, percentageAmount, ...rest }) => {
   const classes = useStyles();
 
-  let arrowIcon = <ArrowDownwardIcon/>;
-  if(percentageAmount > 0){
-    arrowIcon = <ArrowUpwardIcon/>
+  let arrowIcon = <ArrowDownwardIcon />;
+  if (percentageAmount > 0) {
+    arrowIcon = <ArrowUpwardIcon />;
   }
 
   return (
-    <Card
-      className={clsx(classes.root, className)}
-      {...rest}
-    >
+    <Card className={clsx(classes.root, className)} {...rest}>
       <CardContent>
-        <Grid
-          container
-          justify="space-between"
-          spacing={3}
-        >
+        <Grid container justify="space-between" spacing={3}>
           <Grid item>
-            <Typography
-              color="textSecondary"
-              gutterBottom
-              variant="h6"
-            >
+            <Typography color="textSecondary" gutterBottom variant="h6">
               運用利益
             </Typography>
-            <Typography
-              color="textPrimary"
-              variant="h3"
-            >
-              <NumberFormat value={profitAmount} displayType={'text'} thousandSeparator={true} prefix={'¥'} />
-             
+            <Typography color="textPrimary" variant="h3">
+              <NumberFormat
+                value={profitAmount}
+                displayType={'text'}
+                thousandSeparator={true}
+                prefix={'¥'}
+              />
             </Typography>
           </Grid>
           <Grid item>
@@ -69,22 +59,17 @@ const Profit = ({ className, profitAmount, percentageAmount, ...rest }) => {
             </Avatar>
           </Grid>
         </Grid>
-        <Box   mt={2}
-          display="flex"
-          alignItems="center">
-        {arrowIcon}
-          <Typography
-            className={classes.differenceValue}
-            variant="body2"
-          >
-            {percentageAmount + "%"}
+        <Box mt={2} display="flex" alignItems="center">
+          {arrowIcon}
+          <Typography className={classes.differenceValue} variant="body2">
+            {percentageAmount + '%'}
           </Typography>
-          
-          </Box><Box mt={2}>
+        </Box>
+        <Box mt={2}>
           <LinearProgress
             value={percentageAmount}
             variant="determinate"
-            title={percentageAmount + "%"}
+            title={percentageAmount + '%'}
           />
         </Box>
       </CardContent>

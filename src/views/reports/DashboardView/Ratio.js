@@ -25,54 +25,36 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
-
-
 const Ratio = ({ className, ratioDiv, ratioAmount, ...rest }) => {
   const classes = useStyles();
 
   let iconDiv = <AddIcon />;
-  
-  if(ratioDiv === false){
+
+  if (ratioDiv === false) {
     iconDiv = <RemoveIcon />;
-  
   }
 
   return (
-    <Card
-      className={clsx(classes.root, className)}
-      {...rest}
-    >
+    <Card className={clsx(classes.root, className)} {...rest}>
       <CardContent>
-        <Grid
-          container
-          justify="space-between"
-          spacing={3}
-        >
+        <Grid container justify="space-between" spacing={3}>
           <Grid item>
-            <Typography
-              color="textSecondary"
-              gutterBottom
-              variant="h6"
-            >
+            <Typography color="textSecondary" gutterBottom variant="h6">
               前日比
             </Typography>
-            <Typography
-              color="textPrimary"
-              variant="h3"
-            >
-              <NumberFormat value={ratioAmount} displayType={'text'} thousandSeparator={true} prefix={'¥'} />
-              
+            <Typography color="textPrimary" variant="h3">
+              <NumberFormat
+                value={ratioAmount}
+                displayType={'text'}
+                thousandSeparator={true}
+                prefix={'¥'}
+              />
             </Typography>
           </Grid>
           <Grid item>
-            <Avatar className={classes.avatar}>
-            
-             {iconDiv}
-              
-            </Avatar>
+            <Avatar className={classes.avatar}>{iconDiv}</Avatar>
           </Grid>
         </Grid>
-      
       </CardContent>
     </Card>
   );
