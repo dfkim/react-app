@@ -13,7 +13,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const HistorysView = () => {
+const CoinsView = () => {
   const classes = useStyles();
   const [coinList, setCoinList] = useState([]);
 
@@ -87,4 +87,4 @@ const HistorysView = () => {
   );
 };
 
-export default HistorysView;
+export default CoinsView;

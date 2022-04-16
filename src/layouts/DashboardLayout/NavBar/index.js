@@ -15,6 +15,7 @@ import {
   Database as DatabseIcon
 } from 'react-feather';
 import AccountBalanceIcon from '@material-ui/icons/AccountBalance';
+import MoneyIcon from '@material-ui/icons/Money';
 import NavItem from './NavItem';
 
 const items = [
@@ -37,12 +38,11 @@ const items = [
     icon: AccountBalanceIcon,
     title: '暗号資産'
   },
-  /*
   {
-    href: '/app/settings',
-    icon: SettingsIcon,
-    title: '設定'
-  },*/
+    href: '/app/dividends',
+    icon: MoneyIcon,
+    title: '配当・分配金'
+  },
 ];
 
 const useStyles = makeStyles(() => ({

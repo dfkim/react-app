@@ -10,6 +10,7 @@ import RegisterView from 'src/views/auth/RegisterView';
 import SettingsView from 'src/views/settings/SettingsView';
 import HistorysView from 'src/views/historys/HistorysView';
 import CoinsView from 'src/views/coins/CoinsView';
+import DividendsView from 'src/views/dividends/DividendsView';
 
 const routes = [
   {
@@ -21,7 +22,8 @@ const routes = [
       { path: 'charts', element: <StocksChartView /> },
       { path: 'settings', element: <SettingsView /> },
       { path: 'historys', element: <HistorysView /> },
-      { path: 'coins', element: <CoinsView /> }
+      { path: 'coins', element: <CoinsView /> },
+      { path: 'dividends', element: <DividendsView /> }
     ]
   },
   {
