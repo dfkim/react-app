@@ -24,5 +24,8 @@ docker run -d --restart=always --name react-app -p 8082:80 react-app
 
 ansible-playbook -i inventory -e ansible_python_interpreter=/opt/homebrew/bin/python3 react_app_deploy.yml
 
+docker run -d --restart=always --name react-app -p 8082:80 react-app
+
+
 
 
