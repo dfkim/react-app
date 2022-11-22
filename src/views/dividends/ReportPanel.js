@@ -20,6 +20,30 @@ function ccyFormat(num) {
   return `${num.toFixed(2)}`;
 }
 
+function number_format(number, decimals, dec_point, thousands_sep) {
+  // * example: number_format(1234.56, 2, ',', ' ');
+  // * return: '1 234,56'
+  number = (number + '').replace(',', '').replace(' ', '');
+  var n = !isFinite(+number) ? 0 : +number,
+    prec = !isFinite(+decimals) ? 0 : Math.abs(decimals),
+    sep = typeof thousands_sep === 'undefined' ? ',' : thousands_sep,
+    dec = typeof dec_point === 'undefined' ? '.' : dec_point,
+    s = '',
+    toFixedFix = function(n, prec) {
+      var k = Math.pow(10, prec);
+      return '' + Math.round(n * k) / k;
+    };
+  // Fix for IE parseFloat(0.55).toFixed(0) = 0;
+  s = (prec ? toFixedFix(n, prec) : '' + Math.round(n)).split('.');
+  if (s[0].length > 3) {
+    s[0] = s[0].replace(/\B(?=(?:\d{3})+(?!\d))/g, sep);
+  }
+  if ((s[1] || '').length < prec) {
+    s[1] = s[1] || '';
+    s[1] += new Array(prec - s[1].length + 1).join('0');
+  }
+  return s.join(dec);
+}
 const ReportPanel = ({ symbolData }) => {
   const classes = useStyles();
   const items = new Map();
@@ -82,24 +106,24 @@ const ReportPanel = ({ symbolData }) => {
           {Array.from(symbolList).map((row, index) => (
             <TableRow key={index}>
               <TableCell>{row.itemName}</TableCell>
-              <TableCell align="right">{row.itemAmount}</TableCell>
-              <TableCell align="right">{row.taxAmount}</TableCell>
-              <TableCell align="right">{ccyFormat(row.profitAmount)}</TableCell>
+              <TableCell align="right">{number_format(row.itemAmount)}</TableCell>
+              <TableCell align="right">{number_format(row.taxAmount)}</TableCell>
+              <TableCell align="right">{number_format(ccyFormat(row.profitAmount))}</TableCell>
             </TableRow>
           ))}
 
           <TableRow>
             <TableCell>合計</TableCell>
-            <TableCell align="right">{ccyFormat(jpItemAmount)}円</TableCell>
-            <TableCell align="right">{ccyFormat(taxAmount)}円</TableCell>
-            <TableCell align="right">{ccyFormat(jpAmount)}円</TableCell>
+            <TableCell align="right">{number_format(ccyFormat(jpItemAmount))}円</TableCell>
+            <TableCell align="right">{number_format(ccyFormat(taxAmount))}円</TableCell>
+            <TableCell align="right">{number_format(ccyFormat(jpAmount))}円</TableCell>
           </TableRow>
 
           <TableRow>
             <TableCell></TableCell>
-            <TableCell align="right">{ccyFormat(usItemAmout)}USドル</TableCell>
+            <TableCell align="right">{number_format(ccyFormat(usItemAmout))}USドル</TableCell>
             <TableCell align="right">-</TableCell>
-            <TableCell align="right">{ccyFormat(usAmount)}USドル</TableCell>
+            <TableCell align="right">{number_format(ccyFormat(usAmount))}USドル</TableCell>
           </TableRow>
         </TableBody>
       </Table>
